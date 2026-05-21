@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="A fully-featured, accessible chess game built with vanilla HTML5, CSS3, and JavaScript.">
+    <meta name="theme-color" content="#769656">
+    <title>Chess Game - Vanilla JS</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div id="app" class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <h1 class="app-title">♔ Chess</h1>
+            <div class="header-controls">
+                <button id="themeToggle" class="icon-btn" aria-label="Toggle dark/light theme" title="Toggle Theme">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Game Area -->
+            <section class="game-section" aria-label="Chess Board">
+                <!-- Top Player Info -->
+                <div class="player-info player-info-top" id="playerTopInfo">
+                    <span class="player-name" id="topPlayerName">Black</span>
+                    <div class="captured-pieces" id="capturedByWhite" aria-label="Pieces captured by White"></div>
+                    <div class="player-status" id="topPlayerStatus"></div>
+                </div>
+
+                <!-- Chess Board Container -->
+                <div class="board-container">
+                    <div 
+                        id="chessBoard" 
+                        class="chess-board" 
+                        role="grid" 
+                        aria-label="Chess board. Use arrow keys to navigate, Enter or Space to select/move pieces."
+                        tabindex="0"
+                    >
+                        <!-- Board squares and pieces will be rendered here by JavaScript -->
+                    </div>
+                    
+                    <!-- Coordinates -->
+                    <div class="board-coordinates files-bottom" aria-hidden="true">
+                        <span>a</span><span>b</span><span>c</span><span>d</span><span>e</span><span>f</span><span>g</span><span>h</span>
+                    </div>
+                    <div class="board-coordinates ranks-left" aria-hidden="true">
+                        <span>8</span><span>7</span><span>6</span><span>5</span><span>4</span><span>3</span><span>2</span><span>1</span>
+                    </div>
+                </div>
+
+                <!-- Bottom Player Info -->
+                <div class="player-info player-info-bottom" id="playerBottomInfo">
+                    <span class="player-name" id="bottomPlayerName">White</span>
+                    <div class="captured-pieces" id="capturedByBlack" aria-label="Pieces captured by Black"></div>
+                    <div class="player-status" id="bottomPlayerStatus"></div>
+                </div>
+            </section>
+
+            <!-- Side Panel -->
+            <aside class="side-panel" aria-label="Game Controls and History">
+                <!-- Game Status -->
+                <div class="panel-section game-status-section">
+                    <h2 class="panel-title">Game Status</h2>
+                    <div id="gameStatus" class="status-display" aria-live="polite">White to move</div>
+                </div>
+
+                <!-- Controls -->
+                <div class="panel-section controls-section">
+                    <h2 class="panel-title">Controls</h2>
+                    <div class="control-buttons">
+                        <button id="newGameBtn" class="control-btn primary">New Game</button>
+                        <button id="undoBtn" class="control-btn" aria-label="Undo last move">Undo</button>
+                        <button id="flipBoardBtn" class="control-btn" aria-label="Flip board orientation">Flip Board</button>
+                    </div>
+                </div>
+
+                <!-- Move History -->
+                <div class="panel-section history-section">
+                    <h2 class="panel-title">Move History</h2>
+                    <div id="moveHistory" class="move-history" role="log" aria-live="polite" aria-label="Move history">
+                        <!-- Moves will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- FEN Import/Export -->
+                <div class="panel-section fen-section">
+                    <h2 class="panel-title">FEN</h2>
+                    <div class="fen-controls">
+                        <button id="exportFenBtn" class="control-btn small">Export FEN</button>
+                        <button id="importFenBtn" class="control-btn small">Import FEN</button>
+                    </div>
+                    <textarea 
+                        id="fenInput" 
+                        class="fen-input" 
+                        placeholder="Paste FEN string here..."
+                        aria-label="FEN input field"
+                        rows="2"
+                    ></textarea>
+                </div>
+
+                <!-- PGN Export -->
+                <div class="panel-section pgn-section">
+                    <h2 class="panel-title">PGN</h2>
+                    <button id="exportPgnBtn" class="control-btn small">Export PGN</button>
+                    <textarea 
+                        id="pgnOutput" 
+                        class="pgn-output" 
+                        readonly 
+                        aria-label="PGN output (read-only)"
+                        rows="3"
+                    ></textarea>
+                </div>
+            </aside>
+        </main>
+
+        <!-- Promotion Modal -->
+        <dialog id="promotionModal" class="modal promotion-modal" aria-labelledby="promotionTitle">
+            <h3 id="promotionTitle" class="modal-title">Choose Promotion</h3>
+            <div class="promotion-options" id="promotionOptions" role="radiogroup" aria-label="Select piece for pawn promotion">
+                <!-- Options will be inserted dynamically -->
+            </div>
+        </dialog>
+
+        <!-- Game Over Modal -->
+        <dialog id="gameOverModal" class="modal game-over-modal" aria-labelledby="gameOverTitle">
+            <h3 id="gameOverTitle" class="modal-title">Game Over</h3>
+            <p id="gameOverMessage" class="game-over-message"></p>
+            <div class="modal-actions">
+                <button id="newGameFromModal" class="control-btn primary">New Game</button>
+                <button id="closeGameOverModal" class="control-btn">Close</button>
+            </div>
+        </dialog>
+
+        <!-- Toast Notifications -->
+        <div id="toastContainer" class="toast-container" aria-live="assertive" aria-atomic="true"></div>
+    </div>
+
+    <!-- Load JavaScript modules -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
