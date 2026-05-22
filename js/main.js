@@ -639,9 +639,6 @@ function showGameOverModal() {
         case 'fifty-move-rule':
             message = 'Draw by the 50-Move Rule.';
             break;
-        case 'insufficient-material':
-            message = 'Draw - Insufficient Material.';
-            break;
         default:
             message = 'Game Over';
     }

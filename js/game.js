@@ -7,7 +7,7 @@
  * - Castling (kingside and queenside)
  * - En passant captures
  * - Pawn promotion
- * - Draw conditions (50-move rule, threefold repetition, insufficient material)
+ * - Draw conditions (50-move rule, threefold repetition)
  * - Immutable state management with full history
  * 
  * @module game
@@ -19,7 +19,6 @@ import {
     cloneGameState,
     generateFEN,
     positionsAreEqual,
-    hasInsufficientMaterial,
     moveToSAN
 } from './utils.js';
 
@@ -810,14 +809,6 @@ export function getGameOverInfo(state) {
         return {
             isGameOver: true,
             reason: 'fifty-move-rule'
-        };
-    }
-    
-    // Insufficient material
-    if (hasInsufficientMaterial(state.board)) {
-        return {
-            isGameOver: true,
-            reason: 'insufficient-material'
         };
     }
     
