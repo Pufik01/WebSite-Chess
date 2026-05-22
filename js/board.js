@@ -511,10 +511,6 @@ export function updateGameStatus(element, state) {
                 element.textContent = 'Draw by 50-Move Rule';
                 element.classList.add('stalemate');
                 break;
-            case 'insufficient-material':
-                element.textContent = 'Draw - Insufficient Material';
-                element.classList.add('stalemate');
-                break;
             default:
                 element.textContent = 'Game Over';
         }
