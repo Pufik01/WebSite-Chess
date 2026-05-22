@@ -163,7 +163,7 @@ function generatePawnMoves(state, row, col, moves) {
     const { board, turn, enPassantSquare } = state;
     const piece = board[row][col];
     const direction = turn === COLORS.WHITE ? -1 : 1;
-    const startRow = turn === COLORS.WHITE ? 6 : 3;
+    const startRow = turn === COLORS.WHITE ? 6 : 1;
     const promotionRow = turn === COLORS.WHITE ? 0 : 7;
     const opponentColor = turn === COLORS.WHITE ? COLORS.BLACK : COLORS.WHITE;
     
